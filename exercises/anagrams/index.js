@@ -8,6 +8,28 @@
 //   anagrams('RAIL! SAFETY!', 'fairy tales') --> True
 //   anagrams('Hi there', 'Bye there') --> False
 
-function anagrams(stringA, stringB) {}
+function anagrams(stringA, stringB) {
+  const objA = assignChar(stringA);
+  const objB = assignChar(stringB);
 
+  const keyA = Object.keys(objA);
+  const keyB = Object.keys(objB);
+
+  if (keyA.length !== keyB.length) return false;
+
+  for (let char in objA) {
+    if (objA[char] !== objB[char]) return false;
+  }
+  return true;
+}
+function assignChar(str) {
+  const charObject = {};
+
+  for (let char of str.replace(/[^\w]/g, "").toLowerCase()) {
+    charObject[char] = charObject[char] + 1 || 1;
+  }
+
+  return charObject;
+}
+anagrams("HEL@!(#(lo world", "World He@!#llo");
 module.exports = anagrams;
